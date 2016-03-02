@@ -1,0 +1,19 @@
+thread_mc_data_manipulate_lib_hao_1
+==============
+
+The c++ matrix library, calculate mean value and error bar between threads. 
+
+Global mean value:
+( \sum_thread {denominator} ) / ( \sum_thread {numerator} )
+
+Thread mean value is
+1/thread_number* ( \sum_thread { denominator/numerator } )
+
+Error bar is from thread mean values
+
+Dependence on 0 level lib_hao:
+1. mpi_lib_hao_0
+2. kahan_error_analysis_lib_hao_0 
+3. matrix_lib_hao_0
+
+This project is licensed under the terms of the MIT license.
