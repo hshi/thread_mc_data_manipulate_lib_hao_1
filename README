@@ -1,7 +1,15 @@
 thread_mc_data_manipulate_lib_hao_1
-==============
+===================================
 
-The c++ matrix library, calculate mean value and error bar between threads. 
+The c++ matrix library, calculate mean value and error bar, and write them into files.
+
+
+============================================================
+For single thread, only write the mean value to file.
+
+============================================================
+For multi-thread, write gloal mean, local mean and error bar
+to file.
 
 Global mean value:
 ( \sum_thread {denominator} ) / ( \sum_thread {numerator} )
@@ -10,6 +18,9 @@ Thread mean value is
 1/thread_number* ( \sum_thread { denominator/numerator } )
 
 Error bar is from thread mean values
+============================================================
+
+
 
 Dependence on 0 level lib_hao:
 1. mpi_lib_hao_0
