@@ -42,7 +42,7 @@ check:
 	(cd test;$(runtest));
 
 rmdat:
-	rm -f *.dat
+	rm -f *.dat test/*.dat
 
 clean:
 	rm -rf lib
