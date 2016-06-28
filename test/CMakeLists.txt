@@ -1,7 +1,11 @@
-set(threadmcdata_test_srcs mc_data_manipulate_test.cpp test_all.cpp)
+set(test_exe threadmcdatatest)
 
-add_executable(threadmcdatatest ${threadmcdata_test_srcs})
-target_link_libraries(threadmcdatatest threadmcdatahao)
-target_link_libraries(threadmcdatatest ${lib_all})
+file(GLOB test_srcs "*.cpp")
 
-install(TARGETS threadmcdatatest DESTINATION test)
+add_executable(${test_exe} ${test_srcs})
+
+target_link_libraries(${test_exe} threadmcdatahao)
+
+target_link_libraries(${test_exe} ${lib_all})
+
+install(TARGETS ${test_exe}  DESTINATION test)

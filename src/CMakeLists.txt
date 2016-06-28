@@ -1,5 +1,7 @@
-set(threadmcdata_srcs mc_data_manipulate.cpp  thread_mc_data_manipulate.cpp)
+set(src_lib threadmcdatahao)
 
-add_library(threadmcdatahao STATIC ${threadmcdata_srcs})
+file(GLOB srcs "*.cpp")
 
-install(TARGETS threadmcdatahao  DESTINATION lib)
+add_library(${src_lib} STATIC ${srcs})
+
+install(TARGETS ${src_lib}  DESTINATION lib)

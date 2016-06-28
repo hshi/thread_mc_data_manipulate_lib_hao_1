@@ -1,3 +1,3 @@
-set(header mc_data_manipulate.h thread_mc_data_manipulate.h)
+file(GLOB header "*.h")
 
 install(FILES ${header}  DESTINATION include)
