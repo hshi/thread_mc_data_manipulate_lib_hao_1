@@ -22,8 +22,8 @@ set(lib_all "")
      include_directories(${acml_include_dirs})
      set(lapackblas_libraries "${acml_libraries}")
    elseif(MKL_FOUND)
-     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -m64")
      add_definitions(-DUSE_MKL)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${mkl_flags}")
      include_directories(${mkl_include_dirs})
      set(lapackblas_libraries "${mkl_libraries}")
    endif()
@@ -44,15 +44,9 @@ set(lib_all "")
    set(lib_all ${magma_libraries} ${lib_all})
    
    #For libaray hao:matrix, kahanerr, and mpi
-   find_package(matrixhao REQUIRED)
-   include_directories(${matrixhao_include_dirs})
-   set(lib_all ${matrixhao_libraries} ${lib_all})
-   
-   find_package(kahanerrhao REQUIRED)
-   set(lib_all ${kahanerrhao_libraries} ${lib_all})
-   
-   find_package(mpihao REQUIRED)
-   set(lib_all ${mpihao_libraries} ${lib_all})
+   find_package(libhao0 REQUIRED)
+   include_directories(${libhao0_include_dirs})
+   set(lib_all ${matrixhao_libraries} ${kahanerrhao_libraries} ${mpihao_libraries} ${lib_all})
 
 include_directories(inc)
 
