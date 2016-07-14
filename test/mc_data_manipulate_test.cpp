@@ -28,7 +28,7 @@ void write_mean_complex_test()
    if(abs(b-0.5)>1e-12) flag++;
    if(MPIRank()==0)
    {
-       if(flag==0)  cout<<"Write_mean_complex passed the test! "<<endl;
+       if(flag==0)  cout<<"PASSED! Write_mean_complex passed the test! "<<endl;
        else         cout<<"Warning!!!! Write_mean_complex failed the test! "<<endl;
    }
    
@@ -70,7 +70,7 @@ void write_mean_complex_array_test()
 
     if(MPIRank()==0)
     {
-        if(flag==0)  cout<<"Write_mean_complex_array passed the test! "<<endl;
+        if(flag==0)  cout<<"PASSED! Write_mean_complex_array passed the test! "<<endl;
         else         cout<<"Warning!!!! Write_mean_complex_array failed the test! "<<endl;
     }
 
