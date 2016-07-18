@@ -62,7 +62,7 @@ set(lib_all "")
    #For libaray hao:matrix, kahanerr, and mpi
    find_package(libhao0 REQUIRED)
    include_directories(${libhao0_include_dirs})
-   set(lib_all ${matrixhao_libraries} ${kahanerrhao_libraries} ${mpihao_libraries} ${lib_all})
+   set(lib_all ${tensorhao_libraries} ${kahanerrhao_libraries} ${mpihao_libraries} ${lib_all})
 
 add_subdirectory(inc)
 
