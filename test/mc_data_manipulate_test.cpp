@@ -2,7 +2,7 @@
 #include "mc_data_manipulate.h"
 
 using namespace std;
-using namespace matrix_hao_lib;
+using namespace tensor_hao;
 
 void write_mean_complex_test()
 {

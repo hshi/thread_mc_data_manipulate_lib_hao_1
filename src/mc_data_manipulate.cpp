@@ -3,7 +3,7 @@
 #include "mc_data_manipulate.h"
 
 using namespace std;
-using namespace matrix_hao_lib;
+using namespace tensor_hao;
 
 
 //input: num and den in main thread

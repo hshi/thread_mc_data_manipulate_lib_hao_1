@@ -4,7 +4,7 @@
 #include "thread_mc_data_manipulate.h"
 
 using namespace std;
-using namespace matrix_hao_lib;
+using namespace tensor_hao;
 
 
 //input: num and den are in each thread; den_thread_sum is sum of den about all threads
@@ -35,17 +35,17 @@ void write_mean_error(size_t L, const KahanData< complex<double> >* num_base_arr
     int M=10000;    //the chunk size 
     int N=(L-1)/M;  //number of chunk (count from 0 ~ N)
     const KahanData< complex<double> >* numbasearray = num_base_array;
-    Matrix<complex<double>,1> mean_global(M), mean(M), send(M); Matrix<double,1> err(M);
+    Tensor_hao<complex<double>,1> mean_global(M), mean(M), send(M); Tensor_hao<double,1> err(M);
     for (int i_chunk=0; i_chunk<=N; i_chunk++)
     {
         int L_chunk=M; if(i_chunk==N) L_chunk=L-M*N;   //0~N-1, passed M*N, left L-M*N
 
         for(int i=0; i<L_chunk; i++) send(i)=numbasearray[i].sum;
 
-        MPISum(L_chunk,send.base_array,mean_global.base_array); mean_global/=den_thread_sum;
+        MPISum(L_chunk,send.data(),mean_global.data()); mean_global/=den_thread_sum;
 
         send=send/den;
-        calculate_mean_err_between_thread(L_chunk, send.base_array, mean.base_array, err.base_array);
+        calculate_mean_err_between_thread(L_chunk, send.data(), mean.data(), err.data());
 
         if(MPIRank()==0)
         {
