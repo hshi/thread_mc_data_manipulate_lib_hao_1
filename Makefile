@@ -6,8 +6,8 @@ runtest := mpirun -np 4 runtest
 #runtest := ./runtest
 
 FLAGS   := -Wall -O3 -std=c++11 -I./inc
-HAOFLG  := -I/home/boruoshihao/lib/lib_hao/mpi/include
-HAOLIB  := -L/home/boruoshihao/lib/lib_hao/mpi/lib -lkahanerrhao -ltensorhao -lmpihao
+HAOFLG  := -I/home/boruoshihao/lib/lib_hao/mpi1.0/include
+HAOLIB  := -L/home/boruoshihao/lib/lib_hao/mpi1.0/lib -lkahanerrhao -ltensorhao -lmpihao
 #HAOFLG  := -I/home/boruoshihao/lib/lib_hao/serial/include
 #HAOLIB  := -L/home/boruoshihao/lib/lib_hao/serial/lib -lkahanerrhao -lmatrixhao -lmpihao
 MPIFLG  :=
