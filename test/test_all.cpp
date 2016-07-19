@@ -1,7 +1,9 @@
-#ifdef MPI_HAO
-#include <mpi.h>
-#endif
 #include <iostream>
+#include "mpi_fun.h"
+
+#ifdef USE_MAGMA
+#include "magma.h"
+#endif
 
 #include "thread_mc_data_manipulate.h"
 
@@ -11,19 +13,20 @@ void mc_data_manipulate_test();
 
 int main(int argc, char** argv)
 {
-    int rank=0;
+    MPIInitFunnel(argc,argv);
 
-#ifdef MPI_HAO
-    MPI_Init(&argc,&argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-#endif
+    #ifdef USE_MAGMA
+    magma_init();
+    #endif
 
-    if(rank==0) cout<<"\n\n\n=======Testing======="<<endl;
+    if( MPIRank()==0 ) cout<<"\n\n\n=======Testing======="<<endl;
     mc_data_manipulate_test();
 
-#ifdef MPI_HAO
-    MPI_Finalize();
-#endif
+    #ifdef USE_MAGMA
+    magma_finalize();
+    #endif
+
+    MPIFinalize();
 
     return 0;
 }
