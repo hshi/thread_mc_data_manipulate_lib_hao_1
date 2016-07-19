@@ -8,8 +8,8 @@ runtest := mpirun -np 4 runtest
 FLAGS   := -Wall -O3 -std=c++11 -I./inc
 HAOFLG  := -I/home/boruoshihao/lib/lib_hao/mpi1.0/include
 HAOLIB  := -L/home/boruoshihao/lib/lib_hao/mpi1.0/lib -lkahanerrhao -ltensorhao -lmpihao
-#HAOFLG  := -I/home/boruoshihao/lib/lib_hao/serial/include
-#HAOLIB  := -L/home/boruoshihao/lib/lib_hao/serial/lib -lkahanerrhao -lmatrixhao -lmpihao
+#HAOFLG  := -I/home/boruoshihao/lib/lib_hao/serial1.0/include
+#HAOLIB  := -L/home/boruoshihao/lib/lib_hao/serial1.0/lib -lkahanerrhao -ltensorhao -lmpihao
 MPIFLG  :=
 MPILIB  :=
 MFLG    := -DUSE_MKL -fopenmp -m64 -I/opt/intel/mkl/include
