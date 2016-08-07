@@ -6,7 +6,6 @@ using namespace tensor_hao;
 
 void write_sum_complex_test()
 {
-    ofstream out_file;
     string filename="out.dat";
     int flag=0;
 
@@ -17,9 +16,7 @@ void write_sum_complex_test()
     complex<double> exact(0,0);
     for(int i=0; i<size; i++) exact += complex<double>(i, 2.0*i); 
 
-    if(MPIRank()==0) out_file.open(filename, ios::out|ios::trunc);
-    write_sum(data, out_file);
-    if(MPIRank()==0) out_file.close();
+    write_sum(data, filename);
 
     if(MPIRank()==0)
     {
@@ -40,7 +37,6 @@ void write_sum_complex_test()
 
 void write_sum_complex_array_test()
 {
-    ofstream out_file;
     string filename="out.dat";
     int flag=0;
 
@@ -48,9 +44,7 @@ void write_sum_complex_array_test()
     double size = MPISize();
     complex<double> exact[3] = { size*(data[0].sum), size*(data[1].sum), size*(data[2].sum) };
 
-    if(MPIRank()==0) out_file.open(filename, ios::out|ios::trunc);
-    write_sum(3, data, out_file);
-    if(MPIRank()==0) out_file.close();
+    write_sum(3, data, filename);
 
     if(MPIRank()==0)
     {

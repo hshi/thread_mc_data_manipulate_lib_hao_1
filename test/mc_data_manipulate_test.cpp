@@ -6,14 +6,11 @@ using namespace tensor_hao;
 
 void write_mean_complex_test()
 {
-    ofstream out_file; 
     string filename="out.dat";
     int flag=0;
     complex<double> num(2.0,3.0), den(1.0,1.0);
 
-    if(MPIRank()==0) out_file.open(filename, ios::out|ios::trunc);
-    write_mean(num, den, out_file);
-    if(MPIRank()==0) out_file.close();
+    write_mean(num, den, filename);
 
     double a,b;
     ifstream in_file;
@@ -38,7 +35,6 @@ void write_mean_complex_test()
 
 void write_mean_complex_array_test()
 {
-    ofstream out_file;
     string filename="out.dat";
     int flag=0;
     KahanData< complex<double> > num[3]={complex<double>(2.0, 3.0),  complex<double>(1.0, 3.0), complex<double>(1.0, 1.0)} ;
@@ -46,9 +42,7 @@ void write_mean_complex_array_test()
     double a_exact[3]={2.5, 2.0, 1.0};
     double b_exact[3]={0.5, 1.0, 0.0};
 
-    if(MPIRank()==0) out_file.open(filename, ios::out|ios::trunc);
-    write_mean(3, num, den, out_file);
-    if(MPIRank()==0) out_file.close();
+    write_mean(3, num, den, filename);
 
     double a[3],b[3];
     ifstream in_file;

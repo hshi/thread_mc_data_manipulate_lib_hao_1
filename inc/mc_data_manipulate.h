@@ -9,19 +9,19 @@
 #include "tensor_all.h"
 
 //Write mean for: complex<double> on main thread
-void write_mean(std::complex<double> num, std::complex<double> den, std::ofstream& file);
+void write_mean(std::complex<double> num, std::complex<double> den, const std::string& filename);
 
 //Write mean for KahanData< complex<double> >* on main thread
 void write_mean(size_t L, const KahanData< std::complex<double> >* num_base_array,
-                      std::complex<double> den, std::ofstream& file);
+                      std::complex<double> den, const std::string& filename);
 
 //Write mean for Tensor_core< KahanData<complex<double> >, D> on main thread
 template <int D>
 void write_mean(const tensor_hao::Tensor_core< KahanData< std::complex<double> >,D>& num,
-                      std::complex<double> den, std::ofstream& file)
+                      std::complex<double> den, const std::string& filename)
 {
     size_t L=num.size();
-    write_mean(L, num.data(), den, file);
+    write_mean(L, num.data(), den, filename);
 }
 
 #endif
