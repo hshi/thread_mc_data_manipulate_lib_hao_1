@@ -10,6 +10,7 @@
 using namespace std;
 
 void mc_data_manipulate_test();
+void thread_mc_data_manipulate_test();
 
 int main(int argc, char** argv)
 {
@@ -21,6 +22,7 @@ int main(int argc, char** argv)
 
     if( MPIRank()==0 ) cout<<"\n\n\n=======Testing======="<<endl;
     mc_data_manipulate_test();
+    thread_mc_data_manipulate_test();
 
     #ifdef USE_MAGMA
     magma_finalize();

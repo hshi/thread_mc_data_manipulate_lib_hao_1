@@ -77,7 +77,6 @@ void write_mean_complex_array_test()
     if(MPIRank()==0) remove( filename.c_str() );
 }
 
-
 void mc_data_manipulate_test()
 {
     write_mean_complex_test();
