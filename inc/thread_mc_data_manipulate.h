@@ -26,6 +26,7 @@ void write_mean_error(const tensor_hao::Tensor_core< KahanData< std::complex<dou
 }
 
 
+
 //Write sum
 void write_sum(std::complex<double> data, const std::string& filename);
 

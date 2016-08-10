@@ -1,40 +1,15 @@
 #include <math.h>
 #include <algorithm>
-#include <fstream>
-#include <iostream>
-#include <complex>
 #include <iomanip>
+#include <fstream>
+#include <complex>
 #include "error_analysis.h"
 #include "kahan.h"
 #include "tensor_all.h"
+#include "read_write_file.h"
 
 using namespace std;
 using namespace tensor_hao;
-
-int file_sample_size(string filename, int L=1)
-{
-    ifstream file(filename);
-    string line;
-    int i=0;
-    while( getline(file, line) ) i++;
-    file.close();
-    return i/L;
-}
-
-void read_file(Tensor_hao<complex<double>, 1>& data, string filename)
-{
-    int L = data.size();
-    double re, im;
-    ifstream file;
-    file.open(filename, ios::in);
-    if ( ! file.is_open() ) {cout << "Error opening file in num_den_error_analysis.cpp!!!"<<endl; exit(1);}
-    for(int i=0; i<L; i++)
-    {
-        file >> re >> im;
-        data(i) = complex<double>(re, im);
-    }
-    file.close();
-}
 
 int main(int argc, char** argv)
 {

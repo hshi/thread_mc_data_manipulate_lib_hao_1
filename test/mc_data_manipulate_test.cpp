@@ -10,7 +10,7 @@ void write_mean_complex_test()
     int flag=0;
     complex<double> num(2.0,3.0), den(1.0,1.0);
 
-    write_mean(num, den, filename);
+    if(MPIRank()==0) write_mean(num, den, filename);
 
     double a,b;
     ifstream in_file;
@@ -42,7 +42,7 @@ void write_mean_complex_array_test()
     double a_exact[3]={2.5, 2.0, 1.0};
     double b_exact[3]={0.5, 1.0, 0.0};
 
-    write_mean(3, num, den, filename);
+    if(MPIRank()==0) write_mean(3, num, den, filename);
 
     double a[3],b[3];
     ifstream in_file;
