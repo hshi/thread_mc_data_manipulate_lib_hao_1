@@ -25,6 +25,6 @@ Error bar is from thread mean values
 Dependence on 0 level lib_hao:
 1. mpi_lib_hao_0
 2. kahan_error_analysis_lib_hao_0 
-3. matrix_lib_hao_0
+3. tensor_lib_hao_0
 
 This project is licensed under the terms of the MIT license.
