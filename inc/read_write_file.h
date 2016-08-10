@@ -15,7 +15,7 @@ void read_file(std::complex<double>& data, std::ifstream& file);
 void read_file(int L, std::complex<double>* data, std::ifstream& file);
 
 template<int D>
-void read_file(tensor_hao::Tensor_hao<std::complex<double>, D>& data, std::ifstream& file)
+void read_file(tensor_hao::Tensor_core<std::complex<double>, D>& data, std::ifstream& file)
 {
     read_file( data.size(), data.data(), file );
 }
@@ -28,7 +28,7 @@ void read_file(std::complex<double>& data, std::string filename);
 void read_file(int L, std::complex<double>* data, std::string filename);
 
 template<int D>
-void read_file(tensor_hao::Tensor_hao<std::complex<double>, D>& data, std::string filename)
+void read_file(tensor_hao::Tensor_core<std::complex<double>, D>& data, std::string filename)
 {
     read_file( data.size(), data.data(), filename );
 }
@@ -42,7 +42,7 @@ void write_file(std::complex<double> data, std::string filename);
 void write_file(int L, const std::complex<double>* data, std::string filename);
 
 template<int D>
-void write_file(const tensor_hao::Tensor_hao<std::complex<double>, D>& data, std::string filename)
+void write_file(const tensor_hao::Tensor_core<std::complex<double>, D>& data, std::string filename)
 {
     write_file( data.size(), data.data(), filename );
 }

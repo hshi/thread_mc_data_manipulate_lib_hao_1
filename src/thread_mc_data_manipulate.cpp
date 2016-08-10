@@ -26,9 +26,52 @@ void write_mean_error(complex<double> num, complex<double> den, complex<double> 
     }
 }
 
+//Same with the last function, the difference is that we are dealing with array
+//We chunk the array to save memory.
+void write_mean_error(size_t L, const complex<double>* num,
+                      complex<double> den, complex<double> den_thread_sum, const string& filename)
+{
+    if(L==0) {return;}
 
+    int M=10000;    //the chunk size 
+    int N=(L-1)/M;  //number of chunk (count from 0 ~ N)
+    const complex<double>* num_ptr = num;
+    Tensor_hao<complex<double>,1> mean_global(M), mean(M), send(M); Tensor_hao<double,1> err(M);
 
-//Same with the last function, the difference is that we are deal with array and KahanData
+    ofstream file;
+    if(MPIRank()==0)
+    {
+        file.open(filename, ios::out|ios::app);
+        file<<setprecision(16)<<scientific;
+    }
+    for (int i_chunk=0; i_chunk<=N; i_chunk++)
+    {
+        int L_chunk=M; if(i_chunk==N) L_chunk=L-M*N;   //0~N-1, passed M*N, left L-M*N
+
+        for(int i=0; i<L_chunk; i++) send(i)=num_ptr[i];
+
+        MPISum(L_chunk,send.data(),mean_global.data()); mean_global/=den_thread_sum;
+
+        send=send/den;
+        calculate_mean_err_between_thread(L_chunk, send.data(), mean.data(), err.data());
+
+        if(MPIRank()==0)
+        {
+           for(int i=0; i<L_chunk; i++)
+           {
+               file<<setw(26)<<mean_global(i).real()<<setw(26)<<mean_global(i).imag()
+                   <<setw(26)<<mean(i).real()<<setw(26)<<mean(i).imag()<<setw(26)<<err(i)<<"\n";
+           }
+        }
+
+        MPIBarrier();
+
+        num_ptr += L_chunk;
+    }
+    if(MPIRank()==0) file.close();
+}
+
+//Same with the last function, the difference is that we are dealing with array and KahanData
 //We chunk the array to save memory.
 void write_mean_error(size_t L, const KahanData< complex<double> >* num_base_array,
                       complex<double> den, complex<double> den_thread_sum, const string& filename)
@@ -71,8 +114,8 @@ void write_mean_error(size_t L, const KahanData< complex<double> >* num_base_arr
         numbasearray+=L_chunk;
     }
     if(MPIRank()==0) file.close();
-
 }
+
 
 
 
@@ -92,7 +135,45 @@ void write_sum(complex<double> data, const string& filename)
     }
 }
 
-//Same with the last function, the difference is that we are deal with array and KahanData
+//Same with the last function, the difference is that we are dealing with array
+//We chunk the array to save memory.
+void write_sum(size_t L, const complex<double>* data, const string& filename)
+{
+    if(L==0) {return;}
+
+    int M=10000;    //the chunk size 
+    int N=(L-1)/M;  //number of chunk (count from 0 ~ N)
+    const complex<double>* data_chunk = data;
+    Tensor_hao<complex<double>,1> data_global(M);
+
+    ofstream file;
+    if(MPIRank()==0)
+    {
+        file.open(filename, ios::out|ios::app);
+        file<<setprecision(16)<<scientific;
+    }
+    for (int i_chunk=0; i_chunk<=N; i_chunk++)
+    {
+        int L_chunk=M; if(i_chunk==N) L_chunk=L-M*N;   //0~N-1, passed M*N, left L-M*N
+
+        MPISum( L_chunk, data_chunk, data_global.data() );
+
+        if(MPIRank()==0)
+        {
+           for(int i=0; i<L_chunk; i++)
+           {
+               file<<setw(26)<<data_global(i).real()<<setw(26)<<data_global(i).imag()<<"\n";
+           }
+        }
+
+        MPIBarrier();
+
+        data_chunk += L_chunk;
+    }
+    if(MPIRank()==0) file.close();
+}
+
+//Same with the last function, the difference is that we are dealing with array and KahanData
 //We chunk the array to save memory.
 void write_sum(size_t L, const KahanData< complex<double> >* data, const string& filename)
 {
