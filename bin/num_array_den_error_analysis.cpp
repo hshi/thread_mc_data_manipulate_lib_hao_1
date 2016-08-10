@@ -17,6 +17,7 @@ int file_line_number(string filename, int L=1)
     string line;
     int i=0;
     while( getline(file, line) ) i++;
+    file.close();
     return i/L;
 }
 
