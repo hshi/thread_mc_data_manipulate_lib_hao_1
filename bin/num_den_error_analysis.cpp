@@ -11,7 +11,7 @@
 using namespace std;
 using namespace tensor_hao;
 
-int file_line_number(string filename, int L=1)
+int file_sample_size(string filename, int L=1)
 {
     ifstream file(filename);
     string line;
@@ -43,8 +43,8 @@ int main(int argc, char** argv)
     string den_filename = argv[2];    //denominator filename
     string out_filename = argv[3];    //output filename
 
-    int num_sample_size = file_line_number(num_filename); 
-    int den_sample_size = file_line_number(den_filename);
+    int num_sample_size = file_sample_size(num_filename); 
+    int den_sample_size = file_sample_size(den_filename);
     int sample_size = (num_sample_size > den_sample_size) ? den_sample_size : num_sample_size; 
     cout<<"Effective sample points is "<<sample_size<<endl;
 

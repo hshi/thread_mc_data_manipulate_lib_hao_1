@@ -11,7 +11,7 @@
 using namespace std;
 using namespace tensor_hao;
 
-int file_line_number(string filename, int L=1)
+int file_sample_size(string filename, int L=1)
 {
     ifstream file(filename);
     string line;
@@ -46,7 +46,7 @@ int main(int argc, char** argv)
     int L          = atoi( argv[3] ); //Each array size
     int block_size = atoi( argv[4] ); //Block size
 
-    int sample_size = file_line_number(data_filename, L); 
+    int sample_size = file_sample_size(data_filename, L); 
     int block_num = sample_size / block_size;
     if( ( sample_size-block_num*block_size ) !=0 ) 
     {
