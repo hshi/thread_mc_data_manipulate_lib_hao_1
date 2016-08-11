@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     if( argc<6 ) 
     { 
         cout<<"Error!!!!! Need input/output file name, array size, and block size!"<<endl; 
-        cout<<"Example: ./num_den_error_analysis num.dat den.dat out.dat array_size block_size!"<<endl;
+        cout<<"Example: ./num_array_den_error_analysis num.dat den.dat out.dat array_size block_size!"<<endl;
         exit(1);
     }
     string num_filename = argv[1];    //numerator filename
