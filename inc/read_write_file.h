@@ -2,12 +2,19 @@
 #define READ_WRITE_FILE_H
 
 #include <complex>
+#include <sys/stat.h>
+#include <unistd.h>
 #include "tensor_all.h"
+
+//Check the file exist or not
+inline bool check_file (const std::string& name)
+{
+  struct stat buffer;
+  return (stat (name.c_str(), &buffer) == 0);
+}
 
 //Check sample size from a file
 int file_sample_size(std::string filename, int L=1);
-
-
 
 //Read data from file
 void read_file(std::complex<double>& data, std::ifstream& file);
